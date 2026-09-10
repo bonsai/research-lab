@@ -9,6 +9,7 @@ Research domains are independent research spaces registered under the generic `r
 | worldmodel | `bonsai/research-worldmodel` | World Models, views, embodiment, prediction |
 | architecture | `bonsai/research-architecture` | Architecture, space, built environment |
 | animation | `bonsai/research-animation` | Animation, motion, image, narrative |
+| pic | `bonsai/research-pic` | PIC, hardware chips, embedded computation |
 
 ## Domain contract
 
