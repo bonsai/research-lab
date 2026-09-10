@@ -1,0 +1,19 @@
+id: EXP-000
+name: experiment-template
+research_question: RQ-000
+hypothesis: H1
+comparison:
+  - object: example
+    native_description: ""
+    mapping:
+      physical: null
+      interface: null
+      cognition: null
+      data: null
+      symbolic: null
+      dynamics: null
+      action: null
+      view_boundary: null
+    ambiguity: []
+    failure_categories: []
+    evidence_ids: []
