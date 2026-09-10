@@ -1,0 +1,23 @@
+id: animation
+name: Animation Research
+purpose: Research how time, motion, image, sound, narrative, and perception are constructed and transformed through animation.
+scope:
+  - animation
+  - moving image
+  - motion design
+  - visual narrative
+  - character and performance
+research_object:
+  primary: animated works and animation systems
+  views: [temporal, visual, sonic, narrative, embodied, technical, symbolic]
+core_questions:
+  - How is perceived motion constructed from discrete representations?
+  - How do body, timing, image, sound, and narrative produce experience?
+  - How can animation processes and effects be represented, compared, and evaluated?
+ontology_refs:
+  - bonsai/world
+  - bonsai/ontology
+  - bonsai/xX
+  - bonsai/think
+related_domains: [experience, embodiment, architecture, intelligence, language]
+default_artifacts: [question, hypothesis, method, experiment, observation, evidence, evaluation, revision]
