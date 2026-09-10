@@ -1,0 +1,153 @@
+id: rx
+name: Research Experience Ontology
+version: 0.1.0
+purpose: >-
+  Represent how a research subject experiences research, updates cognitive and
+  strategic state, and generates subsequent questions without conflating
+  experience with evidence.
+
+principles:
+  - experience_is_subject_side_state_change
+  - experience_is_not_evidence
+  - action_is_not_outcome
+  - outcome_is_not_evidence_automatically
+  - learning_must_update_research_state
+  - next_question_may_be_generated_from_state_change
+  - provenance_is_required_for_evidence
+
+subjects:
+  - research_subject
+  - human_researcher
+  - research_agent
+  - research_team
+
+objects:
+  research_subject:
+    kind: actor
+  research_experience:
+    kind: experience
+  research_observation:
+    kind: observation
+  research_question:
+    kind: question
+  research_decision:
+    kind: decision
+  research_action:
+    kind: action
+  research_outcome:
+    kind: outcome
+  research_evidence:
+    kind: evidence
+  research_evaluation:
+    kind: evaluation
+  research_learning:
+    kind: learning
+  research_state:
+    kind: state
+  next_question:
+    kind: question
+
+relations:
+  subject_experiences:
+    domain: research_subject
+    range: research_experience
+  experience_observes:
+    domain: research_experience
+    range: research_observation
+  experience_generates_question:
+    domain: research_experience
+    range: research_question
+  experience_informs_decision:
+    domain: research_experience
+    range: research_decision
+  decision_selects_action:
+    domain: research_decision
+    range: research_action
+  action_produces_outcome:
+    domain: research_action
+    range: research_outcome
+  outcome_produces_evidence:
+    domain: research_outcome
+    range: research_evidence
+  evaluation_updates_experience:
+    domain: research_evaluation
+    range: research_experience
+  learning_updates_research_state:
+    domain: research_learning
+    range: research_state
+  research_state_generates_next_question:
+    domain: research_state
+    range: next_question
+
+canonical_loop:
+  - research_world
+  - observation
+  - experience
+  - cognition
+  - question
+  - decision
+  - action
+  - outcome
+  - evidence
+  - evaluation
+  - experience_update
+  - next_question
+  - research_world
+
+experience_state:
+  required:
+    - subject
+    - timestamp
+    - trigger
+    - prior_state
+    - experience
+    - interpretation
+    - state_update
+  optional:
+    - uncertainty
+    - confidence
+    - strategy_change
+    - method_change
+    - decision_change
+    - next_question
+
+research_state:
+  fields:
+    - knowledge_state
+    - confidence_state
+    - strategy_state
+    - method_state
+    - unresolved_gaps
+    - active_questions
+    - next_questions
+
+boundaries:
+  rp: research_plan
+  rq: research_question
+  rw: research_way
+  tf: task_force
+  aw: work_execution
+  rx: subject_experience
+  evidence: evidence_requires_provenance_and_evaluation
+
+non_equivalences:
+  experience: evidence
+  reflection: evidence
+  question: conclusion
+  action: outcome
+  outcome: evidence
+  diary: research_experience
+
+state_transition:
+  from: research_state
+  trigger: experience_update
+  to: research_state
+  may_generate: next_question
+
+compatibility:
+  foundation: bonsai/xX
+  world: bonsai/world
+  thinking: bonsai/think
+  intelligence: bonsai/intelligence
+  research_reasoning: bonsai/research-agent
+  execution: AW
