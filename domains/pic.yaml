@@ -1,0 +1,27 @@
+id: pic
+name: PIC / Hardware Chip Research
+purpose: Research programmable hardware, microcontrollers, chips, embedded computation, interfaces, and hardware-software co-design.
+scope:
+  - PIC and microcontrollers
+  - hardware chips
+  - embedded systems
+  - digital logic
+  - hardware architecture
+  - hardware-software co-design
+  - sensors and actuators
+research_object:
+  primary: programmable hardware and chip-based computing systems
+  views: [physical, electrical, logical, architectural, firmware, interface, computational, embodied]
+core_questions:
+  - What computation should be implemented in hardware rather than software?
+  - How do chip architecture and physical constraints shape computation and agent capability?
+  - How do hardware interfaces transform observation, action, and experience?
+  - What research methods can compare hardware architectures under real constraints?
+ontology_refs:
+  - bonsai/world
+  - bonsai/ontology
+  - bonsai/intelligence
+  - bonsai/xX
+  - bonsai/work
+related_domains: [architecture, animation, embodiment, intelligence, experience, work]
+default_artifacts: [question, hypothesis, method, experiment, observation, measurement, evidence, evaluation, revision]
