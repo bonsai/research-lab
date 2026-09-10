@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bonsai/research-lab/schemas/rx-event.schema.json",
+  "title": "RX Research Experience Event",
+  "type": "object",
+  "required": ["id", "subject", "timestamp", "trigger", "prior_state", "experience", "interpretation", "state_update"],
+  "properties": {
+    "id": {"type": "string"},
+    "subject": {"type": "string"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "trigger": {"type": "string"},
+    "prior_state": {"type": "object", "additionalProperties": true},
+    "experience": {"type": "string"},
+    "interpretation": {"type": "string"},
+    "state_update": {"type": "object", "additionalProperties": true},
+    "uncertainty": {"type": "number", "minimum": 0, "maximum": 1},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "strategy_change": {"type": "string"},
+    "method_change": {"type": "string"},
+    "decision_change": {"type": "string"},
+    "next_question": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}
