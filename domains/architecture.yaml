@@ -1,0 +1,23 @@
+id: architecture
+name: Architecture Research
+purpose: Research how spaces, buildings, systems, and environments are conceived, represented, constructed, occupied, and transformed.
+scope:
+  - architecture
+  - spatial systems
+  - built environment
+  - construction
+  - design
+research_object:
+  primary: architectural systems
+  views: [physical, spatial, social, technical, economic, symbolic]
+core_questions:
+  - How does architecture transform states of the built environment?
+  - How do body, space, material, and information interact?
+  - How can architectural knowledge be represented and evaluated?
+ontology_refs:
+  - bonsai/world
+  - bonsai/ontology
+  - bonsai/xX
+  - bonsai/work
+related_domains: [embodiment, work, experience, intelligence]
+default_artifacts: [question, hypothesis, method, experiment, observation, evidence, evaluation, revision]
