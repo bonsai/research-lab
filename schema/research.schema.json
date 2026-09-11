@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bonsai.github.io/research-lab/schema/research.schema.json",
+  "title": "Research Lab Type",
+  "description": "Canonical type for a reusable research project template.",
+  "type": "object",
+  "required": ["type", "id", "title", "status", "questions"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["research", "experiment", "observation", "evidence", "thesis", "question", "protocol"]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[0-9]{3,}$"
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "verifying", "supported", "qualified", "rejected", "completed", "archived"]
+    },
+    "domain": { "type": "string" },
+    "object": { "type": "string" },
+    "scope": { "type": "string" },
+    "questions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "thesis": { "type": "string" },
+    "antithesis": { "type": "string" },
+    "method": { "type": "string" },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "next": { "type": "string" },
+    "links": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
