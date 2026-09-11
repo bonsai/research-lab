@@ -1,0 +1,57 @@
+version: "1.0.0"
+purpose: "Reusable issue ontology for separating research goals from agent and development work."
+
+issue_types:
+  LAB-RQ:
+    meaning: Research Question
+    role: "What the laboratory wants to know."
+    output: [question, hypothesis, antithesis, acceptance]
+
+  LAB-TASK:
+    meaning: Research Task
+    role: "Research work that advances an RQ."
+    output: [research_decision, structure_update, next_question]
+
+  AW:
+    meaning: Agent Work
+    role: "Instruction for an agent to collect, inspect, normalize, or transform information."
+    output: [corpus, normalized_data, source_records]
+
+  DEV:
+    meaning: Development Task
+    role: "Instruction to a human or coding agent to implement research infrastructure."
+    output: [code, api, schema, workflow]
+
+  EXP:
+    meaning: Experiment
+    role: "Reproducible execution used to test a research claim or boundary."
+    output: [result, measurement, failure, reproducibility]
+
+  RX:
+    meaning: Research eXperience
+    role: "Observation and interpretation produced by research activity."
+    output: [observation, interpretation, next_question]
+
+  ARCH:
+    meaning: Architecture Task
+    role: "Change to the research system, ontology, repository structure, or workflow itself."
+    output: [architecture_decision, schema, convention]
+
+relations:
+  - LAB-RQ -> LAB-TASK
+  - LAB-TASK -> AW
+  - LAB-TASK -> DEV
+  - LAB-TASK -> EXP
+  - AW -> RX
+  - DEV -> EXP
+  - EXP -> RX
+  - RX -> LAB-RQ
+  - ARCH -> any
+
+rules:
+  - "AW completion does not mean the RQ is answered."
+  - "DEV completion does not mean an experiment has occurred."
+  - "EXP requires execution, conditions, and result."
+  - "RX records observation separately from interpretation."
+  - "LAB-RQ describes research purpose, not implementation detail."
+  - "ARCH changes the research system rather than answering a domain RQ."
