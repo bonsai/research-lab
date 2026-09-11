@@ -1,0 +1,89 @@
+version: 1
+name: research-runtime
+description: CrewAI-like role separation combined with a LangGraph-like stateful research loop.
+
+architecture:
+  role_layer:
+    question: Who does what?
+    abstraction: Subject -> Role -> Responsibility
+    principle: Roles define responsibility, not personality.
+  state_layer:
+    question: How does research evolve?
+    abstraction: State -> Transition -> Loop
+    principle: State transitions define research progress, not agent identity.
+
+roles:
+  professor:
+    responsibility: question
+    inputs: [intent, context, evidence]
+    outputs: [research_question]
+  researcher:
+    responsibility: investigate
+    inputs: [research_question, sources]
+    outputs: [findings]
+  engineer:
+    responsibility: implement
+    inputs: [research_task, specification]
+    outputs: [experiment]
+  analyst:
+    responsibility: evaluate
+    inputs: [experiment, data]
+    outputs: [evidence, evaluation]
+  archivist:
+    responsibility: record
+    inputs: [sources, actions, results]
+    outputs: [provenance, record]
+
+states:
+  - intent
+  - rq
+  - task
+  - investigation
+  - experiment
+  - evidence
+  - reflection
+  - next_rq
+
+transitions:
+  - from: intent
+    to: rq
+    actor: professor
+  - from: rq
+    to: task
+    actor: researcher
+  - from: task
+    to: investigation
+    actor: researcher
+  - from: task
+    to: experiment
+    actor: engineer
+  - from: investigation
+    to: evidence
+    actor: analyst
+  - from: experiment
+    to: evidence
+    actor: analyst
+  - from: evidence
+    to: reflection
+    actor: analyst
+  - from: reflection
+    to: next_rq
+    actor: professor
+  - from: next_rq
+    to: rq
+    actor: professor
+
+research_loop:
+  canonical: Intent -> RQ -> Task -> AW/DEV/EXP -> Evidence -> RX -> Next RQ
+  repeat: true
+
+boundaries:
+  role_layer_does_not_define: state_machine
+  state_layer_does_not_define: agent_personality
+  human_decides: values_and_research_direction
+  agent_executes: bounded_research_work
+
+mapping:
+  crewai_like: role_layer
+  langgraph_like: state_layer
+  research_lab: both
