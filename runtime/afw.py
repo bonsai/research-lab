@@ -9,7 +9,8 @@ research-lab template to a specific agent framework.
 """
 
 from dataclasses import dataclass, field
-from typing import Any, Callable
+import sys
+from typing import Any
 
 
 @dataclass(frozen=True)
@@ -104,7 +105,36 @@ def demo() -> ResearchState:
     )
 
 
+def run_from(start_state: str) -> ResearchState:
+    """Run a deterministic proof path beginning at a requested state."""
+    valid_states = {t.source for t in DEFAULT_TRANSITIONS} | {t.target for t in DEFAULT_TRANSITIONS}
+    if start_state not in valid_states:
+        raise ValueError(f"invalid start state: {start_state!r}")
+
+    runtime = AFW(DEFAULT_ROLES, DEFAULT_TRANSITIONS)
+    runtime.state.state = start_state
+    runtime.state.history = [start_state]
+
+    proof_actor = {
+        "intent": "professor",
+        "rq": "researcher",
+        "task": "engineer",
+        "investigation": "analyst",
+        "experiment": "analyst",
+        "evidence": "analyst",
+        "reflection": "professor",
+        "next_rq": "professor",
+    }
+
+    while runtime.state.state not in {"evidence", "rq"}:
+        actor = proof_actor[runtime.state.state]
+        runtime.step(actor, {"afw": "proof"})
+
+    return runtime.state
+
+
 if __name__ == "__main__":
-    result = demo()
+    start_state = sys.argv[1] if len(sys.argv) > 1 else "intent"
+    result = run_from(start_state)
     print(" -> ".join(result.history))
     print(result.payload)
