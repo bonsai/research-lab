@@ -1,0 +1,45 @@
+name: AFW Runtime Proof
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_state:
+        description: AFW start state
+        required: true
+        default: intent
+        type: choice
+        options:
+          - intent
+          - rq
+          - task
+          - experiment
+
+jobs:
+  afw:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Resolve role and transition
+        id: afw
+        env:
+          START_STATE: ${{ inputs.start_state }}
+        run: |
+          python runtime/afw.py "$START_STATE"
+
+      - name: Record evidence
+        run: |
+          mkdir -p evidence/afw
+          printf '%s\n' \
+            "AFW runtime proof" \
+            "start_state=${{ inputs.start_state }}" \
+            "workflow=${{ github.workflow }}" \
+            "run_id=${{ github.run_id }}" \
+            "sha=${{ github.sha }}" \
+            > evidence/afw/run-${{ github.run_id }}.md
+
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-evidence-${{ github.run_id }}
+          path: evidence/afw/
