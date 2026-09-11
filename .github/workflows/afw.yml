@@ -1,6 +1,8 @@
 name: AFW Runtime Proof
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       start_state:
@@ -23,7 +25,7 @@ jobs:
       - name: Resolve role and transition
         id: afw
         env:
-          START_STATE: ${{ inputs.start_state }}
+          START_STATE: ${{ inputs.start_state || 'intent' }}
         run: |
           python runtime/afw.py "$START_STATE"
 
@@ -32,7 +34,7 @@ jobs:
           mkdir -p evidence/afw
           printf '%s\n' \
             "AFW runtime proof" \
-            "start_state=${{ inputs.start_state }}" \
+            "start_state=${{ inputs.start_state || 'intent' }}" \
             "workflow=${{ github.workflow }}" \
             "run_id=${{ github.run_id }}" \
             "sha=${{ github.sha }}" \
